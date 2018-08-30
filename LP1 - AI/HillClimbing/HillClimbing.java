@@ -9,7 +9,7 @@ public class BestFirstSearch {
         nodes_count = scan.nextInt();
         Algorithm a = new Algorithm(nodes_count); 
         a.getter();
-        a.bestFirst();
+        a.hillClimbing();
     }    
 }
 
@@ -64,7 +64,7 @@ class Algorithm {
         }
 }
 
-    public void bestFirst() {
+    public void hillClimbing() {
 
         Node current = nodes.get(START);
         current.setVisit(true);

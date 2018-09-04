@@ -1,7 +1,8 @@
 import java.util.*;
 
 class Node {
-	int heuristic;
+    int heuristic;
+    int g;
     int node_number;
     Node parent;
     boolean visited;
@@ -10,8 +11,9 @@ class Node {
 	Node(int node_number, int heuristic) {
         visited = false;
         parent = null;
-		this.heuristic = heuristic;
-		this.node_number = node_number;
+        g = 0;
+	this.heuristic = heuristic;
+	this.node_number = node_number;
     }
     
     public void show() {
@@ -38,4 +40,8 @@ class Node {
     }
 
     public int getHeuristic() { return heuristic; }
+    
+    public void setG(int g) { this.g = g; }
+    
+    public int getG() { return g; }
 }

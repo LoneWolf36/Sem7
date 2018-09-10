@@ -108,7 +108,8 @@ class Algorithm {
         else return null;
 
         for (Node node : OPEN) {
-            if(optimal.getHeuristic() > node.getHeuristic()) optimal = node;
+        		int f = node.getF();
+            if(optimal.getF() > node.getF()) optimal = node;
         }
         return optimal;
     }
@@ -122,6 +123,8 @@ class Algorithm {
                 OPEN.add(nodes.get(i));
                 nodes.get(i).setVisit(true);
                 nodes.get(i).setParent(node);
+                int g = nodes.get(i).getG();
+                nodes.get(i).setG(g+1);
             }
         }
     }

@@ -19,7 +19,7 @@ int main() {
 	double start = omp_get_wtime();
 	for(i=0;i<size;i++) {
 		for(j=0;j<size;j++) {
-			result[i] += matrix[i][j] * vector[i];
+			result[i] += matrix[i][j] * vector[j];
 		}
 		cout<<result[i]<<endl;
 	}

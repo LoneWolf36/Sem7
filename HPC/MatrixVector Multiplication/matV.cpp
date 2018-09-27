@@ -38,13 +38,11 @@ int main() {
 	#pragma omp parallel shared (matrix, vector, result) private (i, j)
 	{
 		#pragma omp for schedule(static)
-		{
-			for(i=0;i<size;i++) {
-				for(j=0;j<size;j++) {
-					result[i] += matrix[i][j] * vector[j];
-				}
+		for(i=0;i<size;i++) {
+			for(j=0;j<size;j++) {
+				result[i] += matrix[i][j] * vector[j];
 			}
-		}	
+		}
 	}
 	end = omp_get_wtime();
 	double elapsed_par = end - start;

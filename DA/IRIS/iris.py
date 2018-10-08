@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from pandas.plotting import scatter_matrix
 from sklearn import model_selection
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
@@ -12,12 +13,30 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
-https://machinelearningmastery.com/machine-learning-in-python-step-by-step/
+url = "iris.csv"
+names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
+dataset = pd.read_csv(url, names=names)
 
-iris_dataset = datasets.load_iris()
-X = iris_dataset.data[:, :2]
-Y = iris_dataset.target
+# Shape
+print(dataset.shape)
 
-print(X)
-print(Y)
+# Peek data
+# print(dataset.head(5))
 
+# Descriptions
+print(dataset.describe())
+
+# Class distribution
+print(dataset.groupby('class').size())
+
+# Box and whisker plots
+dataset.plot(kind='box', subplots=True, layout=(2, 2), sharex=False, sharey=False)
+plt.show()
+
+# Histogram
+dataset.hist()
+plt.show()
+
+# Scatter plot matrix
+scatter_matrix(dataset)
+plt.show()

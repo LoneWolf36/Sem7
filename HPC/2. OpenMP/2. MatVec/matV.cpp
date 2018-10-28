@@ -1,5 +1,6 @@
 #include <iostream>
 #include <omp.h>
+#include <time.h>
 using namespace std;
 
 int main() {
@@ -7,6 +8,7 @@ int main() {
 	int size = 1000;
 	int matrix[size][size], vector[size], result[size];
 	int i, j;
+	clock_t start, end;
 	
 	// Setting values
 	for(i=0;i<size;i++) {
@@ -18,14 +20,14 @@ int main() {
 	}
 	
 	// Serial matrix multiplication
-	double start = omp_get_wtime();
+	start = clock();
 	for(i=0;i<size;i++) {
 		for(j=0;j<size;j++) {
 			result[i] += matrix[i][j] * vector[j];
 		}
 	}
-	double end = omp_get_wtime();
-	double elapsed_ser = end - start;
+	end = clock();
+	double elapsed_ser = ((double)end-start)/CLOCKS_PER_SEC;
 	cout<<"Elapsed time for serial: "<<elapsed_ser;
 	
 	// Setting result to 0 again
@@ -34,18 +36,15 @@ int main() {
 	}
 	
 	// Parallel matrix multiplication
-	start = omp_get_wtime();
-	#pragma omp parallel shared (matrix, vector, result) private (i, j)
-	{
-		#pragma omp for schedule(static)
-		for(i=0;i<size;i++) {
-			for(j=0;j<size;j++) {
-				result[i] += matrix[i][j] * vector[j];
-			}
+	double t1 = omp_get_wtime();
+	#pragma omp parallel for shared (matrix, vector, result) schedule(static)
+	for(i=0;i<size;i++) {
+		for(j=0;j<size;j++) {
+			result[i] += matrix[i][j] * vector[j];
 		}
 	}
-	end = omp_get_wtime();
-	double elapsed_par = end - start;
+	double t2 = omp_get_wtime();
+	double elapsed_par = t2 - t1;
 	cout<<"Elapsed time for parallel: "<<elapsed_par;
 	return 0;
 }

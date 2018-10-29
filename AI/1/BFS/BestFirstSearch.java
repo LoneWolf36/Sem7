@@ -150,3 +150,36 @@ class Algorithm {
         System.out.println();
     }
 }
+
+/*
+How many nodes are there in the graph? :14
+Enter START node number: 0
+Enter GOAL node number: 9
+Enter heuristic for node 0: 12
+Enter heuristic for node 1: 3
+Enter heuristic for node 2: 6
+Enter heuristic for node 3: 5
+Enter heuristic for node 4: 9
+Enter heuristic for node 5: 8
+Enter heuristic for node 6: 12
+Enter heuristic for node 7: 14
+Enter heuristic for node 8: 7
+Enter heuristic for node 10: 6
+Enter heuristic for node 11: 1
+Enter heuristic for node 12: 10
+Enter heuristic for node 13: 2
+
+0 1 1 1 0 0 0 0 0 0 0 0 0 0
+1 0 0 0 1 1 0 0 0 0 0 0 0 0 
+1 0 0 0 0 0 1 1 0 0 0 0 0 0 
+1 0 0 0 0 0 0 0 1 0 0 0 0 0 
+0 1 0 0 0 0 0 0 0 0 0 0 0 0 
+0 1 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 1 0 0 0 0 0 0 0 0 0 0 0 
+0 0 1 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 1 1 0 0 0 
+0 0 0 0 0 0 0 0 1 0 0 1 1 1 
+0 0 0 0 0 0 0 0 1 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 0 0 0 0 0 1 0 0 0 0

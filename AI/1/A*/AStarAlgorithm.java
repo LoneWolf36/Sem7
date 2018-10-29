@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class BestFirstSearch {
+public class AStarAlgorithm {
     public static Scanner scan = new Scanner(System.in);
     
     public static void main(String[] args) {
@@ -9,7 +9,7 @@ public class BestFirstSearch {
         nodes_count = scan.nextInt();
         Algorithm a = new Algorithm(nodes_count); 
         a.getter();
-        a.hillClimbing();
+        a.Astar();
     }    
 }
 
@@ -17,17 +17,21 @@ class Algorithm {
     int GOAL;
     int START;
     int count;
+    int distances[];
     ArrayList<Node> CLOSED = new ArrayList<>(); // Stores the nodes that have been visited
     ArrayList<Node> OPEN = new ArrayList<>(); // Stores the nodes to be visited
     ArrayList<Node> nodes = new ArrayList<>();
-
     public Scanner scan = new Scanner(System.in);
      
     Algorithm(int nodes_count) {
         count = nodes_count;
+        distances = new int[nodes_count];
+        Arrays.fill(distances, 1);
     }
 
     public void getter() {
+    	for(int i : distances)
+    	System.out.println(i);
         System.out.print("\nEnter START node number: ");
         START = scan.nextInt();
         System.out.print("\nEnter GOAL node number: ");
@@ -64,7 +68,7 @@ class Algorithm {
         }
 }
 
-    public void hillClimbing() {
+    public void Astar() {
 
         Node current = nodes.get(START);
         current.setVisit(true);
@@ -104,7 +108,8 @@ class Algorithm {
         else return null;
 
         for (Node node : OPEN) {
-            if(optimal.getHeuristic() > node.getHeuristic()) optimal = node;
+        		int f = node.getF();
+            if(optimal.getF() > node.getF()) optimal = node;
         }
         return optimal;
     }
@@ -118,6 +123,8 @@ class Algorithm {
                 OPEN.add(nodes.get(i));
                 nodes.get(i).setVisit(true);
                 nodes.get(i).setParent(node);
+                int g = nodes.get(i).getG();
+                nodes.get(i).setG(g+1);
             }
         }
     }
@@ -126,7 +133,6 @@ class Algorithm {
         CLOSED.add(node);
         OPEN.remove(node);
     }
-
 
     public static void traverseParents(Node node) {
         System.out.println("Parent Traversal :: \n");
@@ -150,3 +156,37 @@ class Algorithm {
         System.out.println();
     }
 }
+
+/*
+How many nodes are there in the graph? :14
+Enter START node number: 0
+Enter GOAL node number: 9
+Enter heuristic for node 0: 12
+Enter heuristic for node 1: 3
+Enter heuristic for node 2: 6
+Enter heuristic for node 3: 5
+Enter heuristic for node 4: 9
+Enter heuristic for node 5: 8
+Enter heuristic for node 6: 12
+Enter heuristic for node 7: 14
+Enter heuristic for node 8: 7
+Enter heuristic for node 10: 6
+Enter heuristic for node 11: 1
+Enter heuristic for node 12: 10
+Enter heuristic for node 13: 2
+
+0 1 1 1 0 0 0 0 0 0 0 0 0 0
+1 0 0 0 1 1 0 0 0 0 0 0 0 0 
+1 0 0 0 0 0 1 1 0 0 0 0 0 0 
+1 0 0 0 0 0 0 0 1 0 0 0 0 0 
+0 1 0 0 0 0 0 0 0 0 0 0 0 0 
+0 1 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 1 0 0 0 0 0 0 0 0 0 0 0 
+0 0 1 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 1 1 0 0 0 
+0 0 0 0 0 0 0 0 1 0 0 1 1 1 
+0 0 0 0 0 0 0 0 1 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 0 0 0 0 0 1 0 0 0 0
+*/
